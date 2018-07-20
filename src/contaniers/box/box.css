@@ -1,0 +1,12 @@
+.GameBox {
+    color: black;
+    border: solid black 5px; 
+    margin: 10px; 
+    width: 200px; 
+    height: 200px; 
+    align-content: center;
+}
+
+.GameBox:hover {
+    background-color: lightblue; 
+}
