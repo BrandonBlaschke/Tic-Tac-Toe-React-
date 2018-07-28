@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import './ticTacToe.css';
 import Box from '../../contaniers/box/box'; 
 import PopUp from '../PopUp/popUp';
+import aiTurn from '../../contaniers/AI/ai';
 
 class TicTacToe extends Component {
 
@@ -16,16 +17,32 @@ class TicTacToe extends Component {
     componentDidMount() {
         this.createBoard(this.props.rows, this.props.cols); 
     }
+    
+    //After player turn then do ai's turn 
+    componentDidUpdate() {
+        
+            if (this.state.playerTurn === "O" && !this.state.gameOver) {
+                let newBoard = aiTurn(this.state.board); 
+                const gameOver = this.checkWinner(newBoard); 
+                
+                this.setState({
+                    board: newBoard, 
+                    moves: this.state.moves + 1, 
+                    gameOver: gameOver,
+                    playerTurn: gameOver ? 'O' : 'X'}); 
+            }
+        
+    }
 
     //Check and see if the last move ended with a winner 
-    checkWinner = (currentBoard, x, y) => {
+    checkWinner = (currentBoard) => {
 
-        if (this.state.moves + 1 >= 9) {
-            return true; 
+        if (this.state.moves > 9) {
+            return false; 
         }
 
         //Current Piece 
-        let player = currentBoard[x][y]; 
+        let player = this.state.playerTurn; 
 
         //Diagonal checkers 
         let checkRight = true; 
@@ -38,16 +55,20 @@ class TicTacToe extends Component {
 
             //For Diagonal 
             checkRight = currentBoard[i][i] === player && checkRight; 
-            checkLeft = currentBoard[2-i][0+i] && checkLeft; 
+            checkLeft = currentBoard[2-i][0+i] === player && checkLeft; 
 
             for (let j = 0; j < this.props.cols; j++) {
                 counterHorz = currentBoard[i][j] === player && counterHorz; 
                 counterVertical = currentBoard[j][i] === player && counterVertical; 
             }
-            if (counterHorz || counterVertical) return true; 
+            if (counterHorz || counterVertical) {
+                console.log('horz ver: ' + counterHorz + ' ' + counterVertical + ' Player: ' + player);
+                return true}; 
         }
 
-        if (checkLeft || checkRight) return true; 
+        if (checkLeft || checkRight) {
+            console.log('DIAGNOAL: ' + checkLeft + ' ' + checkRight + ' Player: ' + player);
+            return true}; 
 
         return false; 
     }
@@ -66,7 +87,7 @@ class TicTacToe extends Component {
         }
 
         const gameOver = this.checkWinner(newBoard, row, col); 
-        this.setState({board: newBoard, moves: this.state.moves + 1, gameOver: gameOver});
+        this.setState({board: newBoard, moves: this.state.moves + 1, gameOver: gameOver, playerTurn: gameOver ? 'X' : 'O'});
 
     }
 
@@ -111,6 +132,8 @@ class TicTacToe extends Component {
         let backdrop = null; 
         if (this.state.gameOver) {
             backdrop = <PopUp clicked={this.resetHandler}>GAMEOVER: {this.state.playerTurn} WINS</PopUp>
+        } else if (this.state.moves >= 9) {
+            backdrop = <PopUp clicked={this.resetHandler}>GAMEOVER: TIE</PopUp>;
         }
 
         return (
