@@ -1,10 +1,12 @@
 .PopUp {
-    background-color: white; 
+    background-color: rgb(255, 255, 255); 
     position: fixed;
+    color: black;
     border: solid black 3px; 
     z-index: 10;
     width: 30%; 
     left: 35%;
+    font-weight: 800; 
     top: 30%; 
     padding: 10px; 
     text-align: center;

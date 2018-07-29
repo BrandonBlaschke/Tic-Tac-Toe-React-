@@ -62,12 +62,12 @@ class TicTacToe extends Component {
                 counterVertical = currentBoard[j][i] === player && counterVertical; 
             }
             if (counterHorz || counterVertical) {
-                console.log('horz ver: ' + counterHorz + ' ' + counterVertical + ' Player: ' + player);
+                //console.log('horz ver: ' + counterHorz + ' ' + counterVertical + ' Player: ' + player);
                 return true}; 
         }
 
         if (checkLeft || checkRight) {
-            console.log('DIAGNOAL: ' + checkLeft + ' ' + checkRight + ' Player: ' + player);
+            //console.log('DIAGNOAL: ' + checkLeft + ' ' + checkRight + ' Player: ' + player);
             return true}; 
 
         return false; 
@@ -84,11 +84,9 @@ class TicTacToe extends Component {
 
         if (newBoard[row][col] == null) {
             newBoard[row][col] = this.state.playerTurn;
-        }
-
-        const gameOver = this.checkWinner(newBoard, row, col); 
+            const gameOver = this.checkWinner(newBoard, row, col); 
         this.setState({board: newBoard, moves: this.state.moves + 1, gameOver: gameOver, playerTurn: gameOver ? 'X' : 'O'});
-
+        }
     }
 
     //Resets the game and state back to start

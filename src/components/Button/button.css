@@ -1,7 +1,8 @@
 .Button {
     border-radius: 15px;
-    background: rgb(33, 157, 173);
+    background: rgb(255, 153, 0);
     color: white; 
+    font-weight: 700; 
     width: 100px;
     height: 50px; 
     text-align: center;
@@ -9,5 +10,5 @@
 }
 
 .Button:hover {
-    background-color: rgb(14, 93, 104);
+    background-color: rgb(212, 142, 11);
 }

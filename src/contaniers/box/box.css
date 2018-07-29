@@ -1,14 +1,16 @@
 .GameBox {
-    color: black;
-    border: solid black 5px; 
+    color: yellow;
+    text-shadow: 3px 3px 0px rgb(102, 102, 13);
+    box-shadow: 1px 1px 15px rgb(26, 25, 25);
     margin: 10px; 
     width: 200px; 
     height: 200px; 
+    background-color: rgb(255, 153, 0);
     align-content: center;
     font-size: 10em; 
     text-align: center;
 }
 
 .GameBox:hover {
-    background-color: lightblue; 
+    background-color: rgb(136, 136, 136); 
 }
