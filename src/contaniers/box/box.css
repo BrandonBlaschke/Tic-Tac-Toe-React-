@@ -14,3 +14,23 @@
 .GameBox:hover {
     background-color: rgb(136, 136, 136); 
 }
+
+.GameBox:disabled {
+    background-color: rgb(0, 0, 0); 
+}
+
+.GameBox:active {
+    animation: pop 0.2s linear;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
